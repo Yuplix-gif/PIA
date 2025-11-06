@@ -13,6 +13,7 @@ registros_json = []
 def Crear_tablas():
         try:
             with sqlite3.connect("primera.db") as conexion:
+                conexion.execute("PRAGMA foreign_keys = ON")
                 mi_cursor = conexion.cursor()
                 mi_cursor.execute("CREATE TABLE IF NOT EXISTS Salas (clave INTEGER PRIMARY KEY, \
                                 nombre TEXT NOT NULL, \
@@ -551,4 +552,5 @@ else:
 Crear_tablas()
 
 if __name__ == "__main__":
+
     main()

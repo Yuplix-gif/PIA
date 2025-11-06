@@ -117,6 +117,7 @@ def registrar_cliente():
         print(f"Cliente registrado con clave {clave}")
         try:
             with sqlite3.connect("primera.db") as conexion:
+                conexion.execute("PRAGMA foreign_keys = ON")
                 mi_cursor = conexion.cursor()
                 cliente = clientes[clave]
                 mi_cursor.execute("INSERT INTO clientes (nombre, apellido) values(:nombre,:apellidos)" ,cliente)
@@ -150,6 +151,7 @@ def registrar_sala():
     print(f"Sala registrada con clave {clave}")
     try:
         with sqlite3.connect("primera.db") as conexion:
+            conexion.execute("PRAGMA foreign_keys = ON")
             mi_cursor = conexion.cursor()
             Sala = salas[clave]
             mi_cursor.execute("INSERT INTO Salas (nombre, cupo) values(:nombre,:cupo)" ,Sala)
@@ -254,6 +256,7 @@ def Registrar_reservacion_sala():
         "Estatus":"Activo"}
     try:
         with sqlite3.connect("primera.db") as conexion:
+            conexion.execute("PRAGMA foreign_keys = ON")
             mi_cursor = conexion.cursor()
             Reservacion = reservaciones[Folio_reservacion]
             mi_cursor.execute("INSERT INTO reservaciones_salas (nombre_evento, fecha_reservacion, id_cliente, id_sala, Turno, Estatus) values(:nombre_evento,:fecha_reservacion,:id_cliente,:id_sala,:Turno,:Estatus)" ,Reservacion)
@@ -552,5 +555,4 @@ else:
 Crear_tablas()
 
 if __name__ == "__main__":
-
     main()
